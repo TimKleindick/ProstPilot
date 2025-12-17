@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prostpilot"
+version = "0.1.0"
+description = "Django backend for the ProstPilot project"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=6.0,<7.0",
+    "GeneralManager>=0.24.2",
+    "django-simple-history>=3.4",
+]
+
+[tool.setuptools]
+package-dir = {"" = "backend"}
+
+[tool.setuptools.packages.find]
+where = ["backend"]
