@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ClassVar
 
 from django.db import models
 from general_manager import GeneralManager
@@ -17,8 +17,11 @@ class BeverageType(GeneralManager):
     beverage_list: Bucket[Beverage]
 
     class Interface(DatabaseInterface):
-        name = models.CharField(max_length=100, unique=True)
-        default_brand = models.ForeignKey(
+        name: ClassVar[models.CharField] = models.CharField(
+            max_length=100,
+            unique=True,
+        )
+        default_brand: ClassVar[models.ForeignKey] = models.ForeignKey(
             "Brand",
             on_delete=models.SET_NULL,
             null=True,
@@ -34,8 +37,11 @@ class Brand(GeneralManager):
     beverage_list: Bucket[Beverage]
 
     class Interface(DatabaseInterface):
-        name = models.CharField(max_length=150, unique=True)
-        icon = models.CharField(max_length=150)
+        name: ClassVar[models.CharField] = models.CharField(
+            max_length=150,
+            unique=True,
+        )
+        icon: ClassVar[models.CharField] = models.CharField(max_length=150)
 
 
 class Beverage(GeneralManager):
@@ -44,17 +50,17 @@ class Beverage(GeneralManager):
     brand: Brand
 
     class Interface(DatabaseInterface):
-        drink_type = models.ForeignKey(
+        drink_type: ClassVar[models.ForeignKey] = models.ForeignKey(
             "BeverageType",
             on_delete=models.CASCADE,
             related_name="beverages",
         )
-        size = models.ForeignKey(
+        size: ClassVar[models.ForeignKey] = models.ForeignKey(
             "catalog.Size",
             on_delete=models.CASCADE,
             related_name="beverages",
         )
-        brand = models.ForeignKey(
+        brand: ClassVar[models.ForeignKey] = models.ForeignKey(
             "Brand",
             on_delete=models.CASCADE,
             related_name="beverages",

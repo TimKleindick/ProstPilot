@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, ClassVar, TypedDict
 
 from django.db import models
 from general_manager import GeneralManager
 from general_manager.bucket import Bucket
-from general_manager.interface import DatabaseInterface, ReadOnlyInterface
+from general_manager.interface import ReadOnlyInterface
 from general_manager.measurement import Measurement, MeasurementField
 
 if TYPE_CHECKING:
@@ -34,8 +34,11 @@ class Container(GeneralManager):
     ]
 
     class Interface(ReadOnlyInterface):
-        name = models.CharField(max_length=100, unique=True)
-        icon = models.CharField(max_length=100)
+        name: ClassVar[models.CharField] = models.CharField(
+            max_length=100,
+            unique=True,
+        )
+        icon: ClassVar[models.CharField] = models.CharField(max_length=100)
 
 
 class size(TypedDict):
@@ -64,8 +67,11 @@ class Size(GeneralManager):
     ]
 
     class Interface(ReadOnlyInterface):
-        container = models.ForeignKey("Container", on_delete=models.CASCADE)
-        volume = MeasurementField("milliliter")
+        container: ClassVar[models.ForeignKey] = models.ForeignKey(
+            "Container",
+            on_delete=models.CASCADE,
+        )
+        volume: ClassVar[MeasurementField] = MeasurementField("milliliter")
 
         class Meta:
             constraints = [

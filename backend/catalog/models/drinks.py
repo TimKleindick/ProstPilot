@@ -1,14 +1,14 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING, TypedDict
 
+from typing import TYPE_CHECKING, ClassVar, TypedDict
 
 from django.db import models
 from general_manager import GeneralManager
-from general_manager.interface import ReadOnlyInterface, DatabaseInterface
 from general_manager.bucket import Bucket
+from general_manager.interface import DatabaseInterface, ReadOnlyInterface
 
 if TYPE_CHECKING:
-    from container import Size
+    from .container import Size
 
 
 class drinkCategory(TypedDict):
@@ -52,8 +52,11 @@ class DrinkCategory(GeneralManager):
     ]
 
     class Interface(ReadOnlyInterface):
-        name = models.CharField(max_length=100, unique=True)
-        description = models.TextField()
+        name: ClassVar[models.CharField] = models.CharField(
+            max_length=100,
+            unique=True,
+        )
+        description: ClassVar[models.TextField] = models.TextField()
 
 
 class Drink(GeneralManager):
@@ -61,8 +64,14 @@ class Drink(GeneralManager):
     drink_group: DrinkGroup
 
     class Interface(DatabaseInterface):
-        size = models.ForeignKey("Size", on_delete=models.CASCADE)
-        drink_group = models.ForeignKey("DrinkGroup", on_delete=models.CASCADE)
+        size: ClassVar[models.ForeignKey] = models.ForeignKey(
+            "Size",
+            on_delete=models.CASCADE,
+        )
+        drink_group: ClassVar[models.ForeignKey] = models.ForeignKey(
+            "DrinkGroup",
+            on_delete=models.CASCADE,
+        )
 
 
 class DrinkGroup(GeneralManager):
@@ -72,6 +81,9 @@ class DrinkGroup(GeneralManager):
     drink_list: Bucket[Drink]
 
     class Interface(DatabaseInterface):
-        name = models.CharField(max_length=100)
-        icon = models.CharField(max_length=100)
-        drink_category = models.ForeignKey("DrinkCategory", on_delete=models.CASCADE)
+        name: ClassVar[models.CharField] = models.CharField(max_length=100)
+        icon: ClassVar[models.CharField] = models.CharField(max_length=100)
+        drink_category: ClassVar[models.ForeignKey] = models.ForeignKey(
+            "DrinkCategory",
+            on_delete=models.CASCADE,
+        )

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, TypedDict
+from typing import TYPE_CHECKING, ClassVar, TypedDict
 
 from django.db import models
 from general_manager import GeneralManager
@@ -9,8 +9,9 @@ from general_manager.interface import DatabaseInterface, ReadOnlyInterface
 from general_manager.measurement import Measurement, MeasurementField
 
 if TYPE_CHECKING:
-    from .beverage import Beverage
     from catalog.models.container import Size, size
+
+    from .beverage import Beverage
 
 
 class Price(GeneralManager):
@@ -21,19 +22,21 @@ class Price(GeneralManager):
     packaging: Packaging
 
     class Interface(DatabaseInterface):
-        beverage = models.ForeignKey(
+        beverage: ClassVar[models.ForeignKey] = models.ForeignKey(
             "shopping.Beverage",
             on_delete=models.CASCADE,
             related_name="prices",
         )
-        supermarket = models.ForeignKey(
+        supermarket: ClassVar[models.ForeignKey] = models.ForeignKey(
             "Supermarket",
             on_delete=models.CASCADE,
             related_name="prices",
         )
-        last_updated = models.DateTimeField(auto_now=True)
-        price_per_unit = MeasurementField("EUR")
-        packaging = models.ForeignKey(
+        last_updated: ClassVar[models.DateTimeField] = models.DateTimeField(
+            auto_now=True,
+        )
+        price_per_unit: ClassVar[MeasurementField] = MeasurementField("EUR")
+        packaging: ClassVar[models.ForeignKey] = models.ForeignKey(
             "Packaging",
             on_delete=models.PROTECT,
             related_name="prices",
@@ -45,8 +48,11 @@ class Supermarket(GeneralManager):
     location: str
 
     class Interface(DatabaseInterface):
-        name = models.CharField(max_length=150, unique=True)
-        location = models.CharField(max_length=255)
+        name: ClassVar[models.CharField] = models.CharField(
+            max_length=150,
+            unique=True,
+        )
+        location: ClassVar[models.CharField] = models.CharField(max_length=255)
 
 
 class packaging(TypedDict):
@@ -124,9 +130,12 @@ class Packaging(GeneralManager):
     ]
 
     class Interface(ReadOnlyInterface):
-        type = models.CharField(max_length=100, unique=True)
-        total_volume = MeasurementField("milliliter")
-        basis_size = models.ForeignKey(
+        type: ClassVar[models.CharField] = models.CharField(
+            max_length=100,
+            unique=True,
+        )
+        total_volume: ClassVar[MeasurementField] = MeasurementField("milliliter")
+        basis_size: ClassVar[models.ForeignKey] = models.ForeignKey(
             "catalog.Size",
             on_delete=models.CASCADE,
         )

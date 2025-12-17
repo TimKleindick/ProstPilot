@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ClassVar
 
 from django.db import models
 from general_manager import GeneralManager
@@ -18,11 +18,13 @@ class Ingredient(GeneralManager):
     default_quantity: Measurement
 
     class Interface(DatabaseInterface):
-        beverage_type = models.ForeignKey(
+        beverage_type: ClassVar[models.ForeignKey] = models.ForeignKey(
             "shopping.BeverageType",
             on_delete=models.CASCADE,
         )
-        default_quantity = MeasurementField("milliliter")
+        default_quantity: ClassVar[MeasurementField] = MeasurementField(
+            "milliliter",
+        )
 
 
 class Recipe(GeneralManager):
@@ -31,4 +33,4 @@ class Recipe(GeneralManager):
     ingredient_list: Bucket[Ingredient]
 
     class Interface(DatabaseInterface):
-        name = models.CharField(max_length=255)
+        name: ClassVar[models.CharField] = models.CharField(max_length=255)
