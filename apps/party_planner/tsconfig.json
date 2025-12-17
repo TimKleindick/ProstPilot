@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "tsBuildInfoFile": "./node_modules/.cache/tsbuildinfo.json",
+    "noEmit": true
+  },
+  "include": ["src"],
+  "references": []
+}

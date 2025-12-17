@@ -1,0 +1,26 @@
+{
+    "name": "prost-pilot-monorepo",
+    "workspaces": [
+        "apps/party_planner"
+    ],
+    "scripts": {
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "lint": "eslint . --cache",
+        "lint:fix": "eslint . --fix --cache",
+        "typecheck": "tsc -b --pretty false --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "^25.0.3",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@typescript-eslint/eslint-plugin": "^8.50.0",
+        "@typescript-eslint/parser": "^8.50.0",
+        "eslint": "^9.39.2",
+        "eslint-plugin-jsx-a11y": "^6.10.2",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^7.0.1",
+        "prettier": "^3.7.4",
+        "typescript": "^5.9.3"
+    }
+}
