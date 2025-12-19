@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "catalog",
     "shopping",
     "recipes",
+    "graphene_django",
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+AUTOCREATE_GRAPHQL = True
+GRAPHQL_URL = "graphql/"
