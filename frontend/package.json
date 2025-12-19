@@ -1,8 +1,5 @@
 {
-    "name": "prost-pilot-monorepo",
-    "workspaces": [
-        "apps/party_planner"
-    ],
+    "name": "prost-pilot",
     "scripts": {
         "format": "prettier --write .",
         "format:check": "prettier --check .",
