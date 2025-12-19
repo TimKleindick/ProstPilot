@@ -9,7 +9,7 @@ from general_manager.interface import DatabaseInterface, ReadOnlyInterface
 from general_manager.measurement import Measurement, MeasurementField
 
 if TYPE_CHECKING:
-    from catalog.models.container import Size, size
+    from catalog.models.container import Size
 
     from .beverage import Beverage
 
@@ -58,7 +58,12 @@ class Supermarket(GeneralManager):
 class packaging(TypedDict):
     type: str
     total_volume: str
-    basis_size: size
+    basis_size: basisSize
+
+
+class basisSize(TypedDict):
+    container_id: int
+    volume: str
 
 
 class Packaging(GeneralManager):
@@ -70,62 +75,62 @@ class Packaging(GeneralManager):
         {
             "type": "Einzelflasche 0.33l",
             "total_volume": "330 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "330 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "330 milliliter"},
         },
         {
             "type": "Einzelflasche 0.5l",
             "total_volume": "500 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "500 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "500 milliliter"},
         },
         {
             "type": "Einzeldose 0.33l",
             "total_volume": "330 milliliter",
-            "basis_size": {"container": "Dose", "volume": "330 milliliter"},
+            "basis_size": {"container_id": 2, "volume": "330 milliliter"},
         },
         {
             "type": "Einzeldose 0.5l",
             "total_volume": "500 milliliter",
-            "basis_size": {"container": "Dose", "volume": "500 milliliter"},
+            "basis_size": {"container_id": 2, "volume": "500 milliliter"},
         },
         {
             "type": "Dosen Palette 24x0.33l",
             "total_volume": "7920 milliliter",
-            "basis_size": {"container": "Dose", "volume": "330 milliliter"},
+            "basis_size": {"container_id": 2, "volume": "330 milliliter"},
         },
         {
             "type": "Dosen Palette 24x0.5l",
             "total_volume": "12000 milliliter",
-            "basis_size": {"container": "Dose", "volume": "500 milliliter"},
+            "basis_size": {"container_id": 2, "volume": "500 milliliter"},
         },
         {
             "type": "Karton 1l",
             "total_volume": "1000 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "1000 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "1000 milliliter"},
         },
         {
             "type": "Sixpack 6x0.33l",
             "total_volume": "1980 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "330 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "330 milliliter"},
         },
         {
             "type": "Sixpack 6x0.5l",
             "total_volume": "3000 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "500 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "500 milliliter"},
         },
         {
             "type": "Kasten 12x1l",
             "total_volume": "12000 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "1000 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "1000 milliliter"},
         },
         {
             "type": "Kasten 20x0.5l",
             "total_volume": "10000 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "500 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "500 milliliter"},
         },
         {
             "type": "Kasten 24x0.33l",
             "total_volume": "7920 milliliter",
-            "basis_size": {"container": "Flasche", "volume": "330 milliliter"},
+            "basis_size": {"container_id": 1, "volume": "330 milliliter"},
         },
     ]
 

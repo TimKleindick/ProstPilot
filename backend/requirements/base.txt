@@ -1,1 +1,1 @@
-GeneralManager>=0.24.2
+GeneralManager>=0.25.0

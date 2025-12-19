@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 class container(TypedDict):
     name: str
     icon: str
+    id: int
 
 
 class Container(GeneralManager):
@@ -23,14 +24,14 @@ class Container(GeneralManager):
     size_list: Bucket[Size]
 
     _data: list[container] = [
-        {"name": "Flasche", "icon": "mdi:bottle"},
-        {"name": "Dose", "icon": "mdi:can"},
-        {"name": "Becher", "icon": "mdi:cup"},
-        {"name": "Shotglas", "icon": "mdi:shot"},
-        {"name": "Weinglas", "icon": "mdi:glass-wine"},
-        {"name": "Sektglas", "icon": "mdi:glass-champagne"},
-        {"name": "Bierglas", "icon": "mdi:glass-mug"},
-        {"name": "Bierkrug", "icon": "mdi:beer"},
+        {"id": 1, "name": "Flasche", "icon": "mdi:bottle"},
+        {"id": 2, "name": "Dose", "icon": "mdi:can"},
+        {"id": 3, "name": "Becher", "icon": "mdi:cup"},
+        {"id": 4, "name": "Shotglas", "icon": "mdi:shot"},
+        {"id": 5, "name": "Weinglas", "icon": "mdi:glass-wine"},
+        {"id": 6, "name": "Sektglas", "icon": "mdi:glass-champagne"},
+        {"id": 7, "name": "Bierglas", "icon": "mdi:glass-mug"},
+        {"id": 8, "name": "Bierkrug", "icon": "mdi:beer"},
     ]
 
     class Interface(ReadOnlyInterface):
@@ -42,7 +43,7 @@ class Container(GeneralManager):
 
 
 class size(TypedDict):
-    container: str
+    container: dict[str, int]
     volume: str
 
 
@@ -52,18 +53,19 @@ class Size(GeneralManager):
     drink_list: Bucket[Drink]
 
     _data: list[size] = [
-        {"container": "Flasche", "volume": "330 milliliter"},
-        {"container": "Flasche", "volume": "500 milliliter"},
-        {"container": "Dose", "volume": "330 milliliter"},
-        {"container": "Dose", "volume": "500 milliliter"},
-        {"container": "Becher", "volume": "200 milliliter"},
-        {"container": "Becher", "volume": "400 milliliter"},
-        {"container": "Shotglas", "volume": "40 milliliter"},
-        {"container": "Weinglas", "volume": "150 milliliter"},
-        {"container": "Sektglas", "volume": "120 milliliter"},
-        {"container": "Bierglas", "volume": "300 milliliter"},
-        {"container": "Bierglas", "volume": "500 milliliter"},
-        {"container": "Bierkrug", "volume": "500 milliliter"},
+        {"container": {"id": 1}, "volume": "330 milliliter"},
+        {"container": {"id": 1}, "volume": "500 milliliter"},
+        {"container": {"id": 1}, "volume": "1000 milliliter"},
+        {"container": {"id": 2}, "volume": "330 milliliter"},
+        {"container": {"id": 2}, "volume": "500 milliliter"},
+        {"container": {"id": 3}, "volume": "200 milliliter"},
+        {"container": {"id": 3}, "volume": "400 milliliter"},
+        {"container": {"id": 4}, "volume": "40 milliliter"},
+        {"container": {"id": 5}, "volume": "150 milliliter"},
+        {"container": {"id": 6}, "volume": "120 milliliter"},
+        {"container": {"id": 7}, "volume": "300 milliliter"},
+        {"container": {"id": 7}, "volume": "500 milliliter"},
+        {"container": {"id": 8}, "volume": "500 milliliter"},
     ]
 
     class Interface(ReadOnlyInterface):
